@@ -1,46 +1,49 @@
-#
-📌 1. What is Hibernate & Why Use It?
-##Hibernate maps Java objects to database tables, letting you interact without SQL.
-✅ Reduces repetitive JDBC code
-✅ Supports caching for faster performance
-✅ Works across databases
-#
-📌 2. How is Hibernate Different from JDBC?
+# 
+## 📌 1. What is Hibernate & Why Use It?
+Hibernate maps Java objects to database tables, letting you interact without SQL.
+- ✅ Reduces repetitive JDBC code
+- ✅ Supports caching for faster performance
+- ✅ Works across databases
+
+## 📌 2. How is Hibernate Different from JDBC?
 JDBC requires SQL queries and manual database handling.
 Hibernate automates mapping and caching for better performance.
-#
-📌 3. Key Hibernate Components
-✔ SessionFactory – Manages connections
-✔ Session – Executes queries
-✔ Transaction – Ensures commit/rollback
-#
-📌 4. What is HQL?
+
+## 📌 3. Key Hibernate Components
+- ✔ **SessionFactory** – Manages connections
+- ✔ **Session** – Executes queries
+- ✔ **Transaction** – Ensures commit/rollback
+
+## 📌 4. What is HQL?
 HQL works on Java objects instead of database tables.
-🔹 SQL Example: SELECT * FROM employees;
-🔹 HQL Example: FROM Employee
-#
-📌 5. What is Caching in Hibernate?
+- 🔹 **SQL Example**: `SELECT * FROM employees;`
+- 🔹 **HQL Example**: `FROM Employee`
+
+## 📌 5. What is Caching in Hibernate?
 Caching improves query performance.
-⚡ First-Level Cache – Default, session-specific.
-⚡ Second-Level Cache – Configurable, shared across sessions.
-#
-📌 6. Lazy vs. Eager Loading
-👉 Lazy Loading – Fetches data only when accessed.
-👉 Eager Loading – Fetches all data immediately.
-💡 Example:
-@OneToMany(fetch = FetchType.LAZY)
-@OneToMany(fetch = FetchType.EAGER)
-#
-📌 7. How Does Hibernate Handle Transactions?
+- ⚡ **First-Level Cache** – Default, session-specific.
+- ⚡ **Second-Level Cache** – Configurable, shared across sessions.
+
+## 📌 6. Lazy vs. Eager Loading
+- 👉 **Lazy Loading** – Fetches data only when accessed.
+- 👉 **Eager Loading** – Fetches all data immediately.
+  - 💡 Example:
+    ```java
+    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
+    ```
+
+## 📌 7. How Does Hibernate Handle Transactions?
 Hibernate ensures ACID transactions for consistency.
-✅ Example:
-Session session = sessionFactory.openSession();
-Transaction tx = session.beginTransaction();
-session.save(employee);
-tx.commit();
-session.close();
-#
-📌 8. Common Hibernate Annotations
+- ✅ Example:
+  ```java
+  Session session = sessionFactory.openSession();
+  Transaction tx = session.beginTransaction();
+  session.save(employee);
+  tx.commit();
+  session.close();
+
+##📌 8. Common Hibernate Annotations
 @Entity – Marks a class as a database entity
 @Table – Maps a class to a table
 @Id – Specifies the primary key
