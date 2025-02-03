@@ -63,8 +63,7 @@ spring.jpa.show-sql=true
 
 
 
-
-
+##
 
 1. Global Exception Handling using @ControllerAdvice
 The @ControllerAdvice annotation is used to create a global exception handler for all controllers. It centralizes exception handling logic, making the code cleaner and more maintainable.
@@ -101,9 +100,6 @@ For more localized exception handling, you can use the @ExceptionHandler annotat
 
 Example:
 
-java
-Copy
-Edit
 @RestController
 public class ProductController {
 
@@ -122,9 +118,6 @@ The @ResponseStatus annotation is used to mark exceptions with specific HTTP sta
 
 Example:
 
-java
-Copy
-Edit
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
@@ -135,10 +128,6 @@ public class ResourceNotFoundException extends RuntimeException {
 You can define a custom error response structure for better clarity.
 
 Custom Error Response Class:
-
-java
-Copy
-Edit
 public class ErrorResponse {
     private String message;
     private String details;
@@ -152,9 +141,6 @@ public class ErrorResponse {
 }
 Example with Global Exception Handler:
 
-java
-Copy
-Edit
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -175,9 +161,6 @@ Spring provides a base class, ResponseEntityExceptionHandler, which you can exte
 
 Example:
 
-java
-Copy
-Edit
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -200,9 +183,6 @@ Always log exceptions for debugging and monitoring purposes. Use frameworks like
 
 Example:
 
-java
-Copy
-Edit
 @ExceptionHandler(Exception.class)
 public ResponseEntity<String> handleGenericException(Exception ex) {
     logger.error("An error occurred", ex);
@@ -213,9 +193,6 @@ When building REST APIs, it's important to return structured error responses. Us
 
 Example Response:
 
-json
-Copy
-Edit
 {
     "timestamp": "2025-01-28T10:30:00Z",
     "message": "Resource not found",
