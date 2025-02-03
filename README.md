@@ -1,5 +1,5 @@
 #
- 1. What is Hibernate & Why Use It?
+📌 1. What is Hibernate & Why Use It?
 Hibernate maps Java objects to database tables, letting you interact without SQL.
 ✅ Reduces repetitive JDBC code
 ✅ Supports caching for faster performance
