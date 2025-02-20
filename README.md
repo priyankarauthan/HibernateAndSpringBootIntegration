@@ -215,3 +215,13 @@ public ResponseEntity<String> handleGenericException(Exception ex) {
 - Standardize **error responses** across the application.
 - Always **log exceptions** for monitoring and debugging.
 - Implement **fallback mechanisms** for resilience.
+
+##  How SAGA Design Pattern Works?
+The SAGA Design Pattern manages long-running distributed transactions by breaking them into smaller steps, each with its own compensating action in case of failure. Here’s how it works:
+
+Breaking Down the Transaction: A big transaction is divided into smaller, independent sub-transactions (steps), each handled by different services. For example, reserving a product, charging the customer, and shipping the item.
+Independent Execution: Each step runs independently without waiting for the others to finish. If a step succeeds, the next step proceeds.
+SAGA Execution Coordinator: The SAGA Execution Coordinator manages and coordinate the flow of these steps, triggering each one in sequence.
+Compensating Actions: If any step fails, the system doesn’t roll back everything. Instead, it executes compensating actions to undo the work done in previous successful steps, like refunding a payment or canceling a reservation.
+SAGA Log: Helps manage and track the state of a long-running distributed transaction, ensuring that all steps are completed successfully or properly compensated in case of failure.
+
