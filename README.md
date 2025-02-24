@@ -292,19 +292,21 @@ Authorization: Bearer <JWT_TOKEN>
 🔹 Step 4: Server Validates JWT
 The server decodes and verifies the token using the secret key.
 If valid, it allows access; otherwise, it denies the request.
-3️⃣ JWT Authentication Flow in Spring Boot
+
+### JWT Authentication Flow in Spring Boot
+
 1️⃣ User Logs In → Server issues JWT
 2️⃣ User includes JWT in API Requests
 3️⃣ Server verifies JWT → Grants access
 4️⃣ JWT expires → User must log in again or refresh token
 
-4️⃣ Advantages of JWT
+###  Advantages of JWT
 ✅ Stateless & Scalable – No need to store session data.
 ✅ Secure & Tamper-proof – The signature prevents token modification.
 ✅ Efficient – Compact and can be used in URL, headers, or cookies.
 ✅ Cross-platform – Works with any language (Java, Python, Node.js, etc.).
 
-5️⃣ JWT vs. Traditional Session-Based Authentication
+###  JWT vs. Traditional Session-Based Authentication
 Feature	JWT Authentication	Session-Based Authentication
 State	Stateless (No DB storage)	Stateful (Session stored in DB)
 Scalability	Highly Scalable	Limited Scalability
@@ -321,14 +323,14 @@ http
         .anyRequest().permitAll()
     )
     .oauth2ResourceServer(oauth2 -> oauth2.jwt());
-6️⃣ JWT Expiration & Refresh Tokens
+### JWT Expiration & Refresh Tokens
 JWT should expire to prevent misuse. You can use Refresh Tokens to get a new access token without logging in again.
 
 1️⃣ Access Token (Short-lived, e.g., 15 mins)
 2️⃣ Refresh Token (Long-lived, e.g., 7 days)
 
-7️⃣ Example: JWT Token Generation in Java
-###
+### Example: JWT Token Generation in Java
+
 Here’s how you generate a JWT token in Java using io.jsonwebtoken (JJWT):
 
 ```
