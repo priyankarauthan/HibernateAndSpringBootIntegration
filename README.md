@@ -225,3 +225,154 @@ SAGA Execution Coordinator: The SAGA Execution Coordinator manages and coordinat
 Compensating Actions: If any step fails, the system doesn’t roll back everything. Instead, it executes compensating actions to undo the work done in previous successful steps, like refunding a payment or canceling a reservation.
 SAGA Log: Helps manage and track the state of a long-running distributed transaction, ensuring that all steps are completed successfully or properly compensated in case of failure.
 
+
+### How JWT Works? 🔐
+
+
+JWT (JSON Web Token) is a compact, self-contained token format used for securely transmitting information between parties as a JSON object. It is commonly used for authentication and authorization.
+
+1️⃣ JWT Structure
+A JWT consists of three parts, separated by dots (.):
+
+css
+Copy
+Edit
+header.payload.signature
+Example:
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMTIiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTY5MjY0MzAwMCwiZXhwIjoxNjkyNjQ2NjAwfQ.8f5a9cS9Tgqz5Pz4Qcn4J4pTURZJh3wT_2Z
+## 📌 Breakdown of JWT Parts
+
+# 1️⃣ Header (Base64 Encoded JSON)
+
+Contains metadata about the token, including the algorithm used for signing.
+```
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
+# 2️⃣ Payload (Base64 Encoded JSON)
+
+Contains claims (user data, roles, and expiration time).
+```
+{
+  "sub": "user12",
+  "role": "USER",
+  "iat": 1692643000,  // Issued at (Unix timestamp)
+  "exp": 1692646600   // Expiration time
+}
+```
+# 3️⃣ Signature
+
+Ensures data integrity and prevents token tampering.
+Generated using the header, payload, and secret key.
+```
+HMACSHA256(
+    base64UrlEncode(header) + "." + base64UrlEncode(payload),
+    secret_key
+)
+```
+
+### 2️⃣ How JWT Authentication Works? 🚀
+
+🔹 Step 1: User Logs In
+User sends username & password to the authentication server.
+
+🔹 Step 2: Server Generates JWT
+Server verifies the credentials.
+If valid, it creates a JWT and sends it to the user.
+
+🔹 Step 3: User Sends JWT in API Requests
+The user includes the JWT in the HTTP Authorization header.
+
+
+Authorization: Bearer <JWT_TOKEN>
+
+🔹 Step 4: Server Validates JWT
+The server decodes and verifies the token using the secret key.
+If valid, it allows access; otherwise, it denies the request.
+3️⃣ JWT Authentication Flow in Spring Boot
+1️⃣ User Logs In → Server issues JWT
+2️⃣ User includes JWT in API Requests
+3️⃣ Server verifies JWT → Grants access
+4️⃣ JWT expires → User must log in again or refresh token
+
+4️⃣ Advantages of JWT
+✅ Stateless & Scalable – No need to store session data.
+✅ Secure & Tamper-proof – The signature prevents token modification.
+✅ Efficient – Compact and can be used in URL, headers, or cookies.
+✅ Cross-platform – Works with any language (Java, Python, Node.js, etc.).
+
+5️⃣ JWT vs. Traditional Session-Based Authentication
+Feature	JWT Authentication	Session-Based Authentication
+State	Stateless (No DB storage)	Stateful (Session stored in DB)
+Scalability	Highly Scalable	Limited Scalability
+Security	Tamper-proof signature	Session hijacking risk
+Storage	Stored on the client	Stored on the server
+🔹 JWT in Spring Boot Security
+Spring Boot uses JWT for authentication in APIs. Here’s an example of how to validate a JWT in Spring Boot:
+
+
+http
+    .authorizeHttpRequests(auth -> auth
+        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+        .requestMatchers("/api/user/**").authenticated()
+        .anyRequest().permitAll()
+    )
+    .oauth2ResourceServer(oauth2 -> oauth2.jwt());
+6️⃣ JWT Expiration & Refresh Tokens
+JWT should expire to prevent misuse. You can use Refresh Tokens to get a new access token without logging in again.
+
+1️⃣ Access Token (Short-lived, e.g., 15 mins)
+2️⃣ Refresh Token (Long-lived, e.g., 7 days)
+
+7️⃣ Example: JWT Token Generation in Java
+###
+Here’s how you generate a JWT token in Java using io.jsonwebtoken (JJWT):
+
+```
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+import java.util.Date;
+
+public class JwtUtil {
+    private static final String SECRET_KEY = "mySecretKey";
+
+    public static String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15)) // 15 min expiry
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
+    }
+}
+```
+
+### 🔹 JWT Token Validation
+```
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+
+public class JwtValidator {
+    private static final String SECRET_KEY = "mySecretKey";
+
+    public static Claims validateToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+}
+```
+
+### 💡 Summary
+JWT is a stateless authentication mechanism that contains user claims in a self-contained token.
+The server generates JWT upon successful login.
+The user sends JWT in API requests (Authorization: Bearer <token>).
+The server verifies JWT using a secret key and grants access.
+JWT can expire, requiring token renewal using a refresh token.
+
+
