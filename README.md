@@ -378,3 +378,62 @@ The server verifies JWT using a secret key and grants access.
 JWT can expire, requiring token renewal using a refresh token.
 
 
+### Difference between JpaRepository and CrudRepository
+
+Use CrudRepository when you only need basic CRUD operations.
+Use JpaRepository when you need additional features like pagination, sorting, batch operations, and flushing.
+
+JpaRepository is a powerful extension of CrudRepository, offering: ✅ Advanced CRUD operations
+✅ Pagination & Sorting
+✅ Batch processing
+✅ Immediate flushing
+✅ Custom JPQL and Native Queries
+✅ Dynamic queries with JpaSpecificationExecutor
+✅ Entity graph support for optimized queries
+
+
+### LOMBOK
+
+Lombok is a Java library that helps reduce boilerplate code by automatically generating common methods like getters, setters, constructors, equals, hashCode, and toString at compile time using annotations.
+
+## 📌 Complete List of Lombok Annotations
+1️⃣ Getter & Setter
+@Getter
+@Setter
+2️⃣ Constructors
+@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
+3️⃣ Object Methods
+@ToString
+@EqualsAndHashCode
+@Data (Shortcut for @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor)
+4️⃣ Builder Pattern
+@Builder
+@Singular (For collections in @Builder)
+5️⃣ Logging
+@Slf4j (SLF4J Logger)
+@Log (Java Util Logging)
+@CommonsLog (Apache Commons Logging)
+@Log4j (Log4j)
+@Log4j2 (Log4j2)
+@XSlf4j (Extended SLF4J)
+6️⃣ Exception Handling
+@SneakyThrows (Sneaky exception handling)
+7️⃣ Lazy Initialization
+@LazyGetter
+@LazySetter
+8️⃣ Utility Class
+@UtilityClass
+9️⃣ Thread Safety
+@Synchronized
+🔟 Miscellaneous
+@NonNull
+@Cleanup (Auto-closing resources)
+@Value (Immutable class with final fields)
+@With (Creates a copy with modified fields)
+@Accessors (Fluent setters)
+@FieldDefaults (Set default field access modifiers)
+
+
+
