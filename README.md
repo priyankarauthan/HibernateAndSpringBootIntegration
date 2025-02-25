@@ -435,5 +435,16 @@ Lombok is a Java library that helps reduce boilerplate code by automatically gen
 @Accessors (Fluent setters)
 @FieldDefaults (Set default field access modifiers)
 
+## CIRCUIT BREAKER DESIGN PATTERN
+
+How It Works:
+Closed State: The consumer (client) calls the remote service normally.
+
+Open State: If the remote service fails too many times (due to timeouts, errors, etc.), the circuit breaker opens and stops further calls to the failing service.
+
+Half-Open State: After a cool-down period, a few test requests are allowed to check if the service has recovered.
+
+Back to Closed State: If the service responds successfully, the circuit closes, and normal operations resume.
+
 
 
