@@ -446,25 +446,6 @@ Half-Open State: After a cool-down period, a few test requests are allowed to ch
 
 Back to Closed State: If the service responds successfully, the circuit closes, and normal operations resume.
 
-## Volatile Keyword
-
-
-The volatile keyword in Java is used for thread safety when accessing shared variables in a multithreaded environment. It ensures that:
-
-Visibility: Changes made by one thread are immediately visible to other threads.
-Prevents Caching: The variable is always read from and written to main memory, not from CPU caches.
-Atomicity for Reads/Writes: Ensures that reads and writes are atomic for variables (but not compound operations like count++).
-
-### 
-Marker Interface in Java
-A Marker Interface is an interface that does not contain any methods or fields. It is used to signal or "mark" a class, providing metadata that can be used by the Java runtime or frameworks to apply special behavior.
-
-# Examples of Marker Interfaces in Java
-Some built-in marker interfaces in Java include:
-
-Serializable (Java I/O) – Marks objects that can be serialized.
-Cloneable (Java Object Cloning) – Marks objects that can be cloned using clone().
-Remote (Java RMI) – Marks objects that can be used for remote method invocation (RMI).
 
 
 
