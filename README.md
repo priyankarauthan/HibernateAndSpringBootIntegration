@@ -234,9 +234,7 @@ JWT (JSON Web Token) is a compact, self-contained token format used for securely
 1️⃣ JWT Structure
 A JWT consists of three parts, separated by dots (.):
 
-css
-Copy
-Edit
+
 header.payload.signature
 Example:
 
@@ -277,13 +275,17 @@ HMACSHA256(
 ### 2️⃣ How JWT Authentication Works? 🚀
 
 🔹 Step 1: User Logs In
+
 User sends username & password to the authentication server.
 
 🔹 Step 2: Server Generates JWT
+
 Server verifies the credentials.
+
 If valid, it creates a JWT and sends it to the user.
 
 🔹 Step 3: User Sends JWT in API Requests
+
 The user includes the JWT in the HTTP Authorization header.
 
 
