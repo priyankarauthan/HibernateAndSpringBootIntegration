@@ -449,6 +449,17 @@ Half-Open State: After a cool-down period, a few test requests are allowed to ch
 Back to Closed State: If the service responds successfully, the circuit closes, and normal operations resume.
 
 
+### What happens internally when you hit a Spring Boot REST endpoint?
+
+“When a REST endpoint is hit, the request is received by the embedded server, passed to the DispatcherServlet, mapped to the appropriate controller via HandlerMapping, processed through filters and interceptors, executed in the controller and service layers, converted to JSON using message converters, and finally returned as an HTTP response.”
+
+Bonus: Diagram Explanation (If Asked)
+
+You can quickly say:
+
+Client → Tomcat → DispatcherServlet → Filters/Interceptors → Controller → Service → Repository → MongoDB → Response
+
+
 
 
 
