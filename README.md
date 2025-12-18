@@ -459,6 +459,16 @@ You can quickly say:
 
 Client → Tomcat → DispatcherServlet → Filters/Interceptors → Controller → Service → Repository → MongoDB → Response
 
+### 👉 What is @ResponseBody? (in very simple words)
+
+@ResponseBody tells Spring:
+
+“Whatever this method returns, send it directly back to the client as data.”
+
+Not as a web page.
+Not as a view name.
+Just raw data (JSON, text, etc.).
+
 
 
 
