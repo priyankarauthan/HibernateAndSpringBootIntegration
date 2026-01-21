@@ -1,5 +1,88 @@
 # Hibernate & Spring Boot Integration
 
+
+
+
+### N+1 Problem
+
+N+1 problem happens when an application first fetches a list of data in one query and then fetches related data separately for each record, causing many unnecessary database calls.
+
+### ✅ Solutions to Fix N+1 Problem (In Points)
+
+1️⃣ Use JOIN FETCH
+
+Fetch parent and child data together in one query
+
+Prevents lazy loading from triggering extra queries
+
+Most effective and most commonly used solution
+
+Best for read operations where related data is required
+
+2️⃣ Use EntityGraph
+
+Tells Hibernate in advance which related fields to load
+
+Keeps code clean and readable
+
+No need to write complex JPQL queries
+
+Good alternative to JOIN FETCH
+
+3️⃣ Use DTO / Projection Queries
+
+Fetch only the required fields instead of full entities
+
+Eliminates lazy loading completely
+
+Improves performance and reduces memory usage
+
+Ideal for APIs, reports, and read-only data
+
+4️⃣ Enable Batch Fetching
+
+Hibernate loads child entities in batches instead of one-by-one
+
+Reduces the number of queries
+
+Helps when JOIN FETCH is not feasible
+
+Partial solution, does not fully eliminate N+1
+
+5️⃣ Use Pagination Carefully
+
+Avoid fetching large datasets at once
+
+Combine pagination with JOIN FETCH or DTOs
+
+Prevents excessive database calls and memory issues
+
+6️⃣ Avoid Accessing Lazy Collections Inside Loops
+
+Accessing lazy-loaded data in loops triggers multiple queries
+
+Always decide fetch strategy before looping
+
+Fetch required relationships upfront
+
+7️⃣ Avoid Using FetchType.EAGER as a Fix
+
+Loads data even when not required
+
+Causes performance and memory problems
+
+Considered a bad practice for fixing N+1
+
+8️⃣ Use Caching (When Applicable)
+
+Second-level cache can reduce repeated DB calls
+
+Useful for frequently accessed, rarely changing data
+
+Should be used carefully
+
+
+
 ## 📌 1. What is Hibernate & Why Use It?
 Hibernate maps Java objects to database tables, allowing interaction without SQL.
 
@@ -70,6 +153,8 @@ spring.datasource.password=root
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 ```
+
+
 
 ---
 
