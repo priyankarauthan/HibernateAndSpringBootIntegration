@@ -79,7 +79,7 @@ Second-level cache can reduce repeated DB calls
 
 Useful for frequently accessed, rarely changing data
 
-Should be used carefully
+
 
 
 
